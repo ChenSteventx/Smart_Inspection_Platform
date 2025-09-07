@@ -1,0 +1,168 @@
+﻿Smart Inspection Platform - 需要添加的文件清单（最终版本）
+=======================================================
+
+当前项目状态：
+-  DJI IRP 工具已添加并配置正确（路径已修正）
+-  项目目录结构已完成
+-  配置文件已更新为最终正确的DJI IRP路径
+-  所有核心模块已完成重构和集成
+
+ 已解决的配置问题：
+- DJI IRP路径已最终更新为：external/temperReader/dji_thermal_sdk_v1.5_20240507/sample/bin/windows/release_x64/dji_irp.exe
+- 路径验证通过，工具可正常使用
+
+还需要手动添加的文件：
+=======================================================
+
+1. 知识图谱功能相关文件  高优先级
+---------------------------
+
+1.1 停用词文件
+位置：D:\ctx\Documents\UAV\Smart_Inspection_Platform\data\cn_stopwords.txt
+说明：中文停用词表，用于知识图谱的分词处理
+重要性：知识图谱功能的核心依赖文件
+来源：需要手动创建或从互联网下载中文停用词表
+示例内容：
+`
+的
+了
+是
+在
+我
+有
+和
+就
+不
+人
+都
+一个
+一些
+这个
+那个
+`
+
+1.2 示例PDF文件（可选）
+位置：D:\ctx\Documents\UAV\Smart_Inspection_Platform\data\A.pdf
+说明：用于PDF处理功能的示例文件
+来源：可以是任意PDF文件，用于测试PDF相关功能
+
+2. MySQL数据库配置  高优先级
+---------------------------
+
+2.1 数据库表结构
+需要在MySQL中创建以下表：
+
+数据库名：school
+表1：特种设备安全法规
+表2：热搜
+
+SQL创建语句：
+`sql
+-- 创建数据库
+CREATE DATABASE IF NOT EXISTS school CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE school;
+
+-- 创建特种设备安全法规表
+CREATE TABLE IF NOT EXISTS 特种设备安全法规 (
+    CID varchar(255) DEFAULT NULL,
+    Cname varchar(255) DEFAULT NULL,
+    Cnumber varchar(255) DEFAULT NULL,
+    Cclass varchar(255) DEFAULT NULL,
+    Cparty varchar(255) DEFAULT NULL,
+    ClawRe varchar(255) DEFAULT NULL,
+    CP varchar(255) DEFAULT NULL,
+    CP1 varchar(255) DEFAULT NULL,
+    CP2 varchar(255) DEFAULT NULL,
+    CP3 varchar(255) DEFAULT NULL,
+    CP4 varchar(255) DEFAULT NULL,
+    Ckey varchar(255) DEFAULT NULL,
+    Cmain text,
+    Cindex text,
+    CB1 varchar(255) DEFAULT NULL,
+    CB2 varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 创建热搜表
+CREATE TABLE IF NOT EXISTS 热搜 (
+    字段 varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+`
+
+2.2 数据库连接信息
+当前配置（可在config/settings.py中修改）：
+- 主机：127.0.1.1
+- 用户：root
+- 密码：123456
+- 端口：3306
+- 数据库：school
+- 字符集：utf8
+
+3. 环境依赖安装  高优先级
+---------------------------
+
+3.1 Python依赖安装
+`cmd
+cd "D:\ctx\Documents\UAV\Smart_Inspection_Platform"
+pip install -r requirements.txt
+`
+
+3.2 Node.js依赖安装
+`cmd
+cd "D:\ctx\Documents\UAV\Smart_Inspection_Platform"
+npm install
+`
+
+4. 快速启动检查清单
+---------------------------
+
+启动前必须完成：
+ MySQL服务已启动
+ 数据库表已创建
+ 停用词文件已添加（cn_stopwords.txt）
+ Python依赖已安装
+ Node.js依赖已安装
+
+验证通过的配置：
+ DJI IRP工具路径正确
+ 项目目录结构完整
+ 所有服务模块已重构
+ 端口配置为5001
+ 模块化架构已实现
+
+5. 启动命令
+---------------------------
+
+`cmd
+cd "D:\ctx\Documents\UAV\Smart_Inspection_Platform"
+python app.py
+`
+
+访问地址：http://localhost:5001
+
+6. 功能模块说明
+---------------------------
+
+重构完成的功能模块：
+-  TDMS数据处理和Excel转换
+-  热成像图片处理和温度分析
+-  DJI司空2系统的BrowserGap代理
+-  知识图谱搜索（需要停用词文件和数据库）
+-  文件上传和管理
+-  预警系统
+-  命令执行功能
+
+7. 项目完整性确认
+---------------------------
+
+ 核心功能：100%保留app_14.py的所有功能
+ 新增功能：集成app_7.py的知识图谱功能
+ 架构升级：单体应用模块化架构
+ 工具集成：DJI IRP工具配置完成
+ 环境支持：Windows环境优化
+ 文档完善：README、任务清单、配置说明
+
+=======================================================
+ 项目重构完成！
+只需要添加停用词文件和配置MySQL数据库即可开始使用。
+所有核心功能已完整迁移，DJI IRP工具配置正确。
+=======================================================
